@@ -18,20 +18,14 @@ _HTML;
 
 require_once 'footer.php';
 
-if(isset($_POST['username']) && $_POST['password'])
-{
-    // Вытаскиваем из БД запись, у которой логин равняеться введенному
-    $query = DB::run("SELECT password FROM users WHERE username=? LIMIT 1", $_POST['username']);
+if(isset($_POST['username']) && $_POST['password']) {
+    $query = DB::run("SELECT password FROM users WHERE username=?", $_POST['username']);
     $data = $query->fetch(PDO::FETCH_ASSOC);
-    // Сравниваем пароли
-    if($data['password'] === $_POST['password'])
-    {
-        // Переадресовываем браузер на страницу проверки нашего скрипта
-            $_SESSION['auth'] = true;
-        header('location:index.php'); 
-    }
-    else
-    {
+    if($data['password'] === $_POST['password']) {
+        $_SESSION['auth'] = true;
+        $_SESSION['name'] = $_POST['username'];
+        header('Location:index.php'); 
+    } else {
         print "Вы ввели неправильный логин/пароль";
     }
 }

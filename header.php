@@ -23,7 +23,7 @@ if(!isset($_SESSION['auth'])) {
 _HTML;
 } else {
     echo <<<_HTML
-        <a href="addnewtask.php">New Task</a>
+        <a href="newtask.php">New Task</a>
         <a href="exit.php">Выход</a>
 _HTML;
 }
