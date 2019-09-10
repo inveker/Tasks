@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 echo <<<_HTML
 <!DOCTYPE html>

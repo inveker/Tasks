@@ -27,8 +27,8 @@ if(isset($_POST['username']) && $_POST['password'])
     if($data['password'] === $_POST['password'])
     {
         // Переадресовываем браузер на страницу проверки нашего скрипта
+            $_SESSION['auth'] = true;
         header('location:index.php'); 
-        $_SESSION['auth'] = true;
     }
     else
     {

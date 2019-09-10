@@ -38,7 +38,7 @@ if(isset($_POST['username']) && $_POST['password']) {
         // Убераем лишние пробелы и делаем двойное хеширование
         $password = $_POST['password'];
 
-        DB::run("INSERT INTO users SET username=?, password=?", array($login, $password));
+        DB::run("INSERT INTO users SET username=?, password=?", $login, $password);
         $_SESSION['username'] = $_POST['username'];
         echo "<p>Вы зарегестрированны</p>";
     }
