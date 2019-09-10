@@ -16,7 +16,7 @@ echo <<<_HTML
         <a href="index.php">Main</a>
 _HTML;
 
-if(!isset($_SESSION['auth'])) {
+if(!isset($_SESSION['user'])) {
     echo <<<_HTML
         <a href="register.php">Register</a>
         <a href="login.php">Login</a>

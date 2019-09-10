@@ -70,3 +70,6 @@ textarea {
 nav {
     height: 50px;
 }
+code {
+    word-wrap: break-word;
+}

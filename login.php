@@ -2,7 +2,7 @@
 session_start();
 require_once 'DB.php';
 
-if(isset($_SESSION['auth'])) {
+if(isset($_SESSION['user'])) {
     header("Location: index.php");
 }
 
@@ -22,8 +22,7 @@ if(isset($_POST['username']) && $_POST['password']) {
     $query = DB::run("SELECT password FROM users WHERE username=?", $_POST['username']);
     $data = $query->fetch(PDO::FETCH_ASSOC);
     if($data['password'] === $_POST['password']) {
-        $_SESSION['auth'] = true;
-        $_SESSION['name'] = $_POST['username'];
+        $_SESSION['user'] = $_POST['username'];
         header('Location:index.php'); 
     } else {
         print "Вы ввели неправильный логин/пароль";

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$name = $_SESSION['name'] ?? 'Guest';
+$name = $_SESSION['user'] ?? 'Guest';
 
 require_once 'header.php';
 
