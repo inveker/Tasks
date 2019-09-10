@@ -16,10 +16,14 @@ for($i = count($q) - 1; $i > 0; $i--) {
     <p>$description</p>
     <h3>Code</h3>
     <code>$code<code>
+_HTML;
+    if(isset($_SESSION['auth'])) {
+        echo <<<_HTML
     <form method="post">
         <input type="hidden" name="id" value='$id'>
         <input type="submit" name="delete" value="Delete">
     </form>
 </div>
 _HTML;
+    }
 }
