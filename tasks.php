@@ -1,14 +1,10 @@
 <?php
+
 require_once 'DB.php';
 $q = DB::run("SELECT id, description, code, created FROM tasks");
 $q = $q->fetchAll();
 
-if(isset($_POST['delete'])) {
-    DB::run("DELETE FROM tasks WHERE id=?", $_POST['id']);
-    header("Location: index.php");
-}
-
-for($i = count($q) - 1; $i > 0; $i--) {
+for($i = count($q) - 1; $i >= 0; $i--) {
     $description = $q[$i]['description'];
     $code = highlight_string($q[$i]['code'], true);
     $id = $q[$i]['id'];
@@ -28,4 +24,9 @@ _HTML;
 _HTML;
     }
     echo '</div>';
+}
+
+if(isset($_POST['delete'])) {
+    DB::run("DELETE FROM tasks WHERE id=?", $_POST['id']);
+    header("Location: index.php");
 }
