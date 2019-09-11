@@ -54,7 +54,7 @@ form {
     display: flex;
     flex-direction: column;
 }
-form input {
+form input, textarea {
     border-radius: 10px;
     padding: 5px;
 }
