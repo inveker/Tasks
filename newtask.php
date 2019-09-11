@@ -1,18 +1,24 @@
 <?php
-session_start();
+
+//ACTION
+if(isset($_POST['create'])) {
+    session_start();
+    require_once 'DB.php';
+    DB::run("INSERT INTO tasks SET description=?, code=?, creater=?", $_POST['text'], $_POST['code'], $_SESSION['user']);
+    header("Location: index.php");
+    exit();
+}
+
+//START HTML
 require_once 'header.php';
-
-require_once 'DB.php';
-    if(isset($_POST['text']) && isset($_POST['code'])) {
-        DB::run("INSERT INTO tasks SET description=?, code=?, created=?", $_POST['text'], $_POST['code'], $_SESSION['user']);
-    }
-
-require_once 'footer.php';
-
-?>
-
-<form method="post">
-    Текст задачи<input name="text" type="text">
-    Программа решения<textarea name="code" rows="15"></textarea>
-    <input type="submit">
+//START FORM?>
+<form action="newtask.php" method="post">
+    Текст задачи<input name="text" type="text" required>
+    Программа решения<textarea name="code" rows="15" required></textarea>
+    <input type="submit" name="create">
 </form>
+<?php //END FORM
+require_once 'footer.php';
+//END HTML
+
+

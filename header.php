@@ -1,6 +1,8 @@
 <?php
+session_start();
+$user = $_SESSION['user'] ?? 'Guest';
+?>
 
-echo <<<_HTML
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,22 +13,17 @@ echo <<<_HTML
 <body>
     <header>
         <img src="img/logo.png" alt="logo">
+        <br>
+        <?= "Welcome $user" ?>
+        <nav>
+            <a href="index.php">Main</a>
+            <?php if(!isset($_SESSION['user'])) : ?>
+            <a href="register.php">Register</a>
+            <a href="login.php">Login</a>
+            <?php else : ?>
+            <a href="newtask.php">New Task</a>
+            <a href="exit.php">Выход</a>
+            <?php endif; ?>
+        </nav>
     </header>
-    <nav>
-        <a href="index.php">Main</a>
-_HTML;
-
-if(!isset($_SESSION['user'])) {
-    echo <<<_HTML
-        <a href="register.php">Register</a>
-        <a href="login.php">Login</a>
-_HTML;
-} else {
-    echo <<<_HTML
-        <a href="newtask.php">New Task</a>
-        <a href="exit.php">Выход</a>
-_HTML;
-}
-
-echo '</nav>';
 

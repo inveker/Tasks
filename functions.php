@@ -15,9 +15,10 @@ function showAllTasks() {
 function showPreviewTasks() {
     $q = DB::run("SELECT * FROM tasks");
     $q = $q->fetchAll();
+    $q = array_reverse($q);
     foreach ($q as $key => $value) {
         $description = mb_substr($value['description'], 0, 100, 'UTF-8') . '...';
-        $created = $value['created'];
+        $created = $value['creater'];
         ?>
     <a href="task.php?id=<?= $value['id'] ?>">
     <div class='preview'>
@@ -35,7 +36,7 @@ function showTask($data)
     $description = $data['description'];
     $code = highlight_string($data['code'], true);
     $id = $data['id']; 
-    $created = $data['created'];
+    $created = $data['creater'];
     //START HTML
         ?>
     <div class='task'>

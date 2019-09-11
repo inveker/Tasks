@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require_once 'DB.php';
 
 if(isset($_SESSION['auth'])) {
