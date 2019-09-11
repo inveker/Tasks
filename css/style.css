@@ -1,5 +1,5 @@
 body {
-    width: 50%;
+    width: 60%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -32,15 +32,10 @@ ul li {
     margin: 5px;
     display: inline;
 }
-ul a {
+a {
     padding: 5px;
     text-decoration: none;
     color: black;
-}
-a:hover {
-    border: 1px dashed black;
-    border-radius: 5px;
-    background-color: #ccc;
 }
 main {
     display: flex;
@@ -72,4 +67,32 @@ nav {
 }
 code {
     word-wrap: break-word;
+}
+h3 {
+    font-family: sans-serif;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: underline;
+}
+.signature {
+    float: right;
+    margin-top: 20px;
+}
+.link {
+    display: block;
+    height: 100%;
+}
+.preview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+}
+.tasks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }

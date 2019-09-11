@@ -1,26 +1,15 @@
 <?php
-
+session_start();
+require_once 'header.php';
 if(isset($_GET['id'])){
     require_once 'DB.php';
+    require_once 'functions.php';
     $id = $_GET['id'];
-    $q = DB::run("SELECT description, code, created FROM tasks WHERE id=$id");
-    $q = $q->fetch(PDO::FETCH_ASSOC);
+    $q = DB::run("SELECT * FROM tasks WHERE id=?", $id);
+    $q = $q->fetch();
+    showTask($q);
 
-    if(isset($_POST['delete'])) {
-        DB::run("DELETE FROM tasks WHERE id=?", $_POST['id']);
-        header("Location: index.php");
-    }
-
-    $description = $q['description'];
-    $code = highlight_string($q['code'], true);
-    echo <<<_HTML
-<div class="task">
-    <h3>Description</h3>
-    <p>$description</p>
-    <h3>Code</h3>
-    <code>$code<code>
-_HTML;
-    if(isset($_SESSION['user']) && $_SESSION['user'] === $q[$i]['created']) {
+    if(isset($_SESSION['user'])) {
         echo <<<_HTML
     <form method="post">
       <input type="hidden" name="id" value='$id'>
@@ -28,5 +17,6 @@ _HTML;
     </form>
 _HTML;
     }
-    echo '</div>';
+
 }
+require_once 'footer.php';

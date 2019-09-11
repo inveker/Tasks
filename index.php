@@ -6,6 +6,9 @@ require_once 'header.php';
 
 echo 'Welcome ' . $name . '<br>'; 
 
-require_once 'tasks.php';
+echo "<div class='tasks'>";
+require_once 'functions.php';
+showPreviewTasks();
+echo "</div>";
 
 require_once 'footer.php';
