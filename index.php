@@ -1,10 +1,5 @@
 <?php
 
-require_once 'header.php';
+require_once 'class/Router.php';
+Router::getPage()->view();
 
-echo "<div class='tasks'>";
-require_once 'functions.php';
-showPreviewTasks();
-echo "</div>";
-
-require_once 'footer.php';
