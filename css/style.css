@@ -101,3 +101,6 @@ h3 {
     flex-wrap: wrap;
     justify-content: center;
 }
+p {
+    margin: 5px;
+}
