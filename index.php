@@ -1,7 +1,13 @@
 <?php
-require_once 'core/DB.php';
-require_once 'core/Router.php';
+//Подключаем автозагрузчик классов
+require_once 'core/autoloader.php';
+//Начинаем работу с сессией
 session_start();
 $_SESSION['auth'] = $_SESSION['auth'] ?? '';
-
+//Создаем массив пустей, допустимых для передачи
+//в $_GET['url'], затем регистрируем его в роутере
+$urls = ['Preview', 'Register', 'Login', 'Task'];
+Router::setPath($urls);
+//Роутер определяет контроллер, после чего заускает
+//его метод run()
 Router::getController()->run();

@@ -1,0 +1,1 @@
+<p>Account "<?=$this->get('username')?>" created<p>

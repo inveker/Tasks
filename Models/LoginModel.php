@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__.'/../core/Model.php';
 
 class LoginModel extends Model
 {
     public function __construct() {
+        $this->data['title'] = 'Login';
         if(isset($_POST['login'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];

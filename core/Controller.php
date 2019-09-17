@@ -8,8 +8,6 @@ class Controller
     public function __construct($name) {
         $M = $name.'Model';
         $V = $name.'View';
-        require_once __DIR__."/../Models/$M.php";
-        require_once __DIR__."/../Views/$V.php";
         $this->model = new $M();
         $this->view = new $V();
     }

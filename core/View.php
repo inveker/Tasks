@@ -5,6 +5,8 @@ abstract class View
     protected $data = [];
 
     abstract protected function content();
+    abstract protected function header();
+    abstract protected function footer();
 
     public function get($name) {
         return $this->data[$name] ?? '';
@@ -20,13 +22,7 @@ abstract class View
         $this->footer();
     }
 
-    protected function header() {
-        require_once __DIR__.'/../Templates/header.php';
-    }
-
-
-
-    protected function footer() {
-        require_once __DIR__.'/../Templates/footer.php';
+    protected function tmp($path) {
+        require __DIR__."/../Templates/$path.php";
     }
 }

@@ -1,9 +1,12 @@
 <?php
-require_once __DIR__.'/../core/View.php';
 
-class LoginView extends View
+class LoginView extends BaseView
 {
     protected function content() {
-        require_once __DIR__.'/../Templates/login.php';
+        $this->tmp('login/start');
+        if(!empty($_SESSION['auth']))
+            $this->tmp('login/success');
+        else
+            $this->tmp('login/form');
     }
 }
