@@ -4,9 +4,12 @@ abstract class View
 {
     protected $data = [];
 
-    abstract protected function content();
-    abstract protected function header();
-    abstract protected function footer();
+    abstract public function render();
+
+    protected function tmp($path) {
+        require __DIR__."/../Templates/$path.php";
+    }
+
 
     public function get($name) {
         return $this->data[$name] ?? '';
@@ -16,13 +19,5 @@ abstract class View
         $this->data = $data;
     }
 
-    public function render() {
-        $this->header();
-        $this->content();
-        $this->footer();
-    }
 
-    protected function tmp($path) {
-        require __DIR__."/../Templates/$path.php";
-    }
 }
