@@ -1,20 +1,21 @@
 <?php
 
-abstract class Controller
+class Controller
 {
     protected $model = null;
     protected $view = null;
 
-    abstract protected function setModel();
-    abstract protected function setView();
-
-    protected function set() {
-        $this->setModel();
-        $this->setView();
+    public function __construct($name) {
+        $M = $name.'Model';
+        $V = $name.'View';
+        require_once __DIR__."/../Models/$M.php";
+        require_once __DIR__."/../Views/$V.php";
+        $this->model = new $M();
+        $this->view = new $V();
     }
 
+
     public function run() {
-        $this->set();
         $this->view->setData($this->model->getData());
         $this->view->render();
     }
