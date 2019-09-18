@@ -2,19 +2,36 @@
 
 class Controller
 {
-    protected $model = null;
-    protected $view = null;
+    private static $path = [];
 
-    public function __construct($name) {
-        $M = $name.'Model';
-        $V = $name.'View';
-        $this->model = new $M();
-        $this->view = new $V();
+    private function __construct(){}
+    private function __clone(){}
+
+    public static function connect() {
+        $name = self::parse();
+        if(in_array($name, self::$path)) {
+            self::run();
+        } else {
+            header("HTTP/1.0 404 Not Found");
+            exit();
+        }
     }
 
+    public static function register($paths) {
+        self::$path = array_merge(self::$path, $paths);
+    }
 
-    public function run() {
-        $this->view->setData($this->model->getData());
-        $this->view->render();
+    private static function run() {
+        $M = $name.'Model';
+        $V = $name.'View';
+        $model = new $M();
+        $view = new $V();
+        $view->setData($model->getData());
+        $view->render();
+    }
+
+    private static function parse() {
+        $name = $_GET['url'] ?? 'Preview';
+        return ucfirst(strtolower($name));
     }
 }
