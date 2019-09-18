@@ -10,7 +10,7 @@ class Controller
     public static function connect() {
         $name = self::parse();
         if(in_array($name, self::$path)) {
-            self::run();
+            self::run($name);
         } else {
             header("HTTP/1.0 404 Not Found");
             exit();
@@ -21,7 +21,7 @@ class Controller
         self::$path = array_merge(self::$path, $paths);
     }
 
-    private static function run() {
+    private static function run($name) {
         $M = $name.'Model';
         $V = $name.'View';
         $model = new $M();
