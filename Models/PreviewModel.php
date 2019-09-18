@@ -2,10 +2,12 @@
 
 class PreviewModel extends Model
 {
-    public function __construct() {
-        $this->data['title'] = 'Preview';
-        $query = DB::run("SELECT * FROM tasks")->fetchAll();
+    protected $tasks = [];
+    protected $title = '';
 
-        $this->data['tasks'] = array_reverse($query);
+    public function __construct() {
+        $this->title = 'Preview';
+        $query = DB::run("SELECT * FROM tasks")->fetchAll();
+        $this->tasks = array_reverse($query);
     }
 }

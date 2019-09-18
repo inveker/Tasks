@@ -4,6 +4,12 @@ class RegisterModel extends Model
 {
     public function __construct() {
         $this->data['title'] = 'Register';
+        if(empty($_SESSION['auth'])) {
+            $this->post();
+        }
+    }
+
+    protected function post() {
         if(isset($_POST['register'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];

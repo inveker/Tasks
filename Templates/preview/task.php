@@ -1,5 +1,5 @@
 <div class='preview'>
-    <p><?=$this->get('description')?></p>
-    <p><?=$this->get('author')?></p>
-    <a href="?url=task&id=<?=$this->get('id')?>">More..</a>
+    <p><?=$this->task['description']?></p>
+    <p><?=$this->task['author']?></p>
+    <a href="?url=task&id=<?=$this->task['id']?>">More..</a>
 </div>

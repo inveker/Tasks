@@ -7,7 +7,7 @@ class NewtaskView extends BaseView
             echo 'Not auth user';
         } else {
             $this->tmp('newtask/start');
-            if($this->get('success') === true)
+            if($this->success === true)
                 echo 'Task add';
             else
                 $this->tmp('newtask/form');

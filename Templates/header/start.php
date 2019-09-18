@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
-    <title><?=$this->get('title')?></title>
+    <title><?=$this->title?></title>
 </head>
 <body>
     <header>

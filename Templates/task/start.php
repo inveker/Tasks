@@ -1,1 +1,1 @@
-<h2>Task #<?=$this->get('id')?></h2>
+<h2>Task #<?=$this->task['id']?></h2>

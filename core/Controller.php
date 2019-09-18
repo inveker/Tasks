@@ -12,8 +12,7 @@ class Controller
         if(in_array($name, self::$path)) {
             self::run($name);
         } else {
-            header("HTTP/1.0 404 Not Found");
-            exit();
+            $not = new ErrorView(['msg' => "Not found controller $name"]);
         }
     }
 
@@ -25,9 +24,7 @@ class Controller
         $M = $name.'Model';
         $V = $name.'View';
         $model = new $M();
-        $view = new $V();
-        $view->setData($model->getData());
-        $view->render();
+        $view = new $V($model->getData());
     }
 
     private static function parse() {

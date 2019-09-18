@@ -1,4 +1,4 @@
-<div class="comment">
-    <p><?=$this->get('comment_text')?></p>
-    <p><?=$this->get('comment_author')?></p>
+<div class="task">
+    <p><?=$this->comment['comment']?></p>
+    <p><?=$this->comment['author']?></p>
 </div>
