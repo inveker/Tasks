@@ -1,13 +1,6 @@
 <?php 
 
-define('DB', array(
-        'user' => 'root',
-        'pass' => 'get5',
-        'host' => 'localhost',
-        'dbname' => 'task',
-        'charset' => 'utf8'));
-
-class DB
+class Db
 {
     protected static $instance = null;
 
@@ -22,7 +15,7 @@ class DB
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => TRUE,
             );
-            $dsn = 'mysql:host=' . DB['host'] . ';dbname=' . DB['dbname'] . ';charset=' . DB['charset'];
+            $dsn = DB['type'].':host='.DB['host'].';dbname='.DB['dbname'].';charset='.DB['charset'];
             self::$instance = new PDO($dsn, DB['user'], DB['pass'], $opt);
         }
         return self::$instance;

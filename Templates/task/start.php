@@ -1,1 +1,0 @@
-<h2>Task #<?=$this->task['id']?></h2>

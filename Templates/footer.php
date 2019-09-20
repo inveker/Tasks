@@ -1,3 +1,0 @@
-    </mani>
-</body>
-</html>

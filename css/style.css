@@ -1,106 +1,108 @@
 html {
+    background-color: white;
     height: 100%;
+    font-family: sans-serif;
 }
 body {
-    max-width: 800px;
     min-height: 100%;
-    margin: auto;
     display: flex;
     flex-direction: column;
-    align-content: center;
-    padding: 10px;
-    font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5)
+    padding: 0;
+    min-width: 320px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 header {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    padding: 10px;
-    border-bottom: 1px solid black;
+    /*align-content: space-around;*/
 }
-footer {
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 nav {
-    width: 100%;
+    align-self: stretch;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 10px;
 }
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+nav > a {
+    text-decoration: underline;
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: all .2s ease-in-out;
 }
-ul li {
+nav > a:hover {
+    color: Chocolate;
+}
+.formRegister, .formLogin, form {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+input:focus, textarea:focus {
+    border: 2px solid teal;
+    outline: none;
+}
+.taskControls {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    margin: 5px 20px 20px 20px;
+}
+.taskControls > * {
+    width: 100%;
+}
+.taskform {
+    align-self: stretch;
+    padding: 20px;
+}
+form > input, form > textarea {
     margin: 5px;
-    display: inline;
-}
-a {
-    padding: 5px;
-    text-decoration: none;
-    color: black;
-}
-main {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
     padding: 10px;
-    border-bottom: 1px solid black;
-}
-form {
-    display: flex;
-    flex-direction: column;
-}
-form input, textarea {
-    border-radius: 10px;
-    padding: 5px;
-}
-textarea {
-    resize: none;
+    border: 1px solid teal;
+    border-radius: 5px;
 }
 .task {
     border: 1px solid black;
     border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
+    margin: 20px 20px 5px 20px;
+    padding: 10px 40px 10px 40px;
 }
-code {
-    word-wrap: break-word;
-}
-h3 {
-    font-family: sans-serif;
-    font-weight: normal;
-    text-align: center;
-    text-decoration: underline;
-}
-.signature {
-    float: right;
-    margin-top: 20px;
-}
-.link {
-    display: block;
-    height: 100%;
+.code {
+    text-align: left;
 }
 .preview {
-    width: 300px;
-    height: 200px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 5px;
+    text-align: left;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: all .2s ease-in-out;
+    border-radius: 10px;
+}
+.preview:hover {
+    margin: 22px;
+    box-shadow: 0 0 50px rgba(210,180,140,0.7);
+}
+.comment {
+    border: 1px dashed teal;
+    margin: 20px;
     padding: 10px;
 }
-.tasks {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+a {
+    color: #000;
+    text-decoration:none;
 }
-p {
-    margin: 5px;
+h2 {
+    color: Teal;
+}
+* {
+    word-wrap: break-word;
 }
