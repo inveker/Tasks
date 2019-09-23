@@ -1,5 +1,8 @@
 <?php
 
+define('DEFAULT_CONTROLLER', 'Main');
+define('DEFAULT_ACTION', 'index');
+
 define('DB', array(
                     'type' => 'mysql',
                     'user' => 'root',
