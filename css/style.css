@@ -1,0 +1,92 @@
+* {
+    font-family: sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 800px;
+    min-width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: auto;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+nav {
+    padding: 20px;
+    border-bottom: 1px solid black;
+}
+nav, nav > a {
+    margin: 20px;
+}
+nav > a {
+    font-size: 24px;
+    text-decoration: underline;
+}
+nav > a:hover {
+    color: green;
+}
+main {
+    display: flex;
+    flex-direction: column;
+}
+.preview {
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: 0.5s;
+    margin: 20px;
+    padding: 20px;
+}
+.preview:hover, .button:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+.task {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 20px;
+    padding: 20px;
+}
+.button {
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 5px 20px;
+    padding: 10px 20px;
+    text-align: center;
+    transition: 0.5s;
+}
+.comment {
+    margin: 20px;
+    padding: 10px 20px;
+    border: 2px dashed green;
+    border-radius: 5px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+form > * {
+    margin: 5px;
+    border-radius: 5px;
+}
+input, textarea {
+    outline:none;
+}
+input:focus, textarea:focus {
+    border: 1px solid green;
+}
+textarea {
+    resize: none;
+}
