@@ -37,7 +37,7 @@ class Account
             //Которое добавляется в сообщении об успешной регистрации
             //После чего рендерится страница и скрипт завершается
             if($result == true)
-                $view->addElement('message', "You are created acconut $result")->render();
+                $view->addElement('message', "You are created acconut [ $result ]")->render();
             //Добавляем контент страницы Register
             $view->addElement('register');
             //Если пользователь уже существует в базе
@@ -47,7 +47,6 @@ class Account
         } else
             //Если пользователь уже авторизирован, добавляем сообщение с ошибкой
             $view->addElement('error', 'You are login');
-        //Рендерим страницу
         $view->render();
     }
 

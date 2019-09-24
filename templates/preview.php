@@ -1,7 +1,7 @@
-<a href="">
+<a href="/task/show/<?=$id?>">
     <div class="preview">
-        <b>ID#25</b>
-        <p><b>Description:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, accusantium facere officia neque cupiditate, architecto.</p>
-        <b>Author: </b><i>Alex</i>
+        <b>ID#<?=$id?></b>
+        <p><b>Description:</b><?=$description?></p>
+        <b>Author: </b><i><?=$author?></i>
     </div>
 </a>

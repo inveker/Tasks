@@ -1,2 +1,2 @@
 <a href="#">New Task</a>
-<a href="#">Account</a>
+<a href="/account/logout">Logout</a>

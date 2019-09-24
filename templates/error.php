@@ -1,1 +1,1 @@
-<b class="message error">Message:  <?=$message?></b>
+<b class="message error">Error:  <?=$message?></b>
