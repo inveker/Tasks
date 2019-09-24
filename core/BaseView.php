@@ -10,6 +10,7 @@ class BaseView
         $this->queue[$i]['path'] = $path;
         $this->queue[$i]['data'] = $data;
         $i++;
+        return $this;
     }
 
     public function render() {
@@ -17,6 +18,7 @@ class BaseView
             extract($element['data']);
             require "templates/{$element['path']}.php";
         }
+        exit();
     }
 
     protected function tmp($name) {
