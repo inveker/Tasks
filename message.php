@@ -1,1 +1,0 @@
-<b class="message">Message:  Hi World!</b>
