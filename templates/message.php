@@ -1,0 +1,1 @@
+<b class="message">Message:  <?=$message?></b>
