@@ -1,11 +1,10 @@
 <?php
 
-class AccountController
+class AccountController extends NormalController
 {
-
     public static function loginAction() {
-        $view = new NormalView('Login');
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
+            $view = new NormalView('Login');
             try {
                 $result = AccountModel::login();
                 if($result === true) { //Warning: render() here
@@ -14,16 +13,15 @@ class AccountController
             } catch (Exception $e) {
                 $view->addElement('error', $e->getMessage());
             }
-            $view->addElement('login');
+            $view->addElement('login')->render();
         } else {
-            $view->addElement('error', 'You are already logged in');
+            throw new Exception("Not Permission");
         }
-        $view->render();
     }
 
     public static function registerAction() {
-        $view = new NormalView('Register');
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
+            $view = new NormalView('Register');
             try {
                 $result = AccountModel::register();
                 if($result == true) { //Warning: render() here
@@ -32,11 +30,10 @@ class AccountController
             } catch (Exception $e) {
                 $view->addElement('error', $e->getMessage());
             }
-            $view->addElement('register');
+            $view->addElement('register')->render();
         } else {
-            $view->addElement('error', 'You are already logged in');
+            throw new Exception("Not Permission");
         }
-        $view->render();
     }
 
     public static function logoutAction() {

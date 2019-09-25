@@ -17,7 +17,7 @@ class Router
         if(class_exists($controller) && method_exists($controller, $action))
             call_user_func_array(array($controller, $action), $args);
         else
-            call_user_func(array('MainController', 'page404Action'));
+            call_user_func(array('MainController', 'page404Action'), $controller, $action);
     }
 
     protected static function prepare($uri) {

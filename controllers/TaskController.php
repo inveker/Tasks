@@ -1,9 +1,9 @@
 <?php
 
-class TaskController
+class TaskController extends NormalController
 {
-    public static function showAction($id = 0) {
-        try {
+
+    protected static function showAction($id = 0) {
             $task = TaskModel::getTask($id);
 
             $view = new NormalView('Task #'.$id);
@@ -20,64 +20,45 @@ class TaskController
                 $view->addElement('comment', $comment);
             }
             $view->render();
-        } catch (Exception $e) {
-            $view = new NormalView('Error');
-            $view->addElement('error', $e->getMessage())->render();
+    }
+
+    protected static function editAction($id = 0) {
+        $task = TaskModel::getTask($id);
+        if($_SESSION['auth'] === $task['author']) { //Доступ только для автора таска
+            if(TaskModel::updateTask($task['id']) === true) { //Если таск был обновлен
+                header('Location: /task/show/'.$task['id']);
+                exit();
+            }
+            $view = new NormalView('Edit #'.$task['id']);
+            $view->addElement('edit_task_form', $task)->render();
+        } else { 
+            throw new Exception("Not permissions");
         }
     }
 
-    public static function editAction($id = 0) {
-        try {
-            $task = TaskModel::getTask($id);
-            if($_SESSION['auth'] === $task['author']) { //Доступ только для автора таска
-                if(TaskModel::updateTask($task['id']) === true) { //Если таск был обновлен
-                    header('Location: /task/show/'.$task['id']);
-                    exit();
-                }
-                $view = new NormalView('Edit #'.$task['id']);
-                $view->addElement('edit_task_form', $task)->render();
-            } else { 
-                throw new Exception("Not permissions");
+    protected static function newAction() {
+        if($_SESSION['auth'] !== null) { //Доступ только для авторизированных пользователей
+            $id = TaskModel::addNewTask();
+            if($id) { //Если модель удачно выполнилась
+                header("Location: /task/show/$id");
+            exit();
             }
-        } catch (Exception $e) {
-            $view = new NormalView('Error');
-            $view->addElement('error', $e->getMessage())->render();
+            $view = new NormalView('New task');
+            $view->addElement('new_task_form')->render();
+        } else {
+            throw new Exception("Not permissions");
         }
     }
 
-    public static function newAction() {
-        try {
-            if($_SESSION['auth'] !== null) { //Доступ только для авторизированных пользователей
-                $id = TaskModel::addNewTask();
-                if($id) { //Если модель удачно выполнилась
-                    header("Location: /task/show/$id");
-                    exit();
-                }
-                $view = new NormalView('New task');
-                $view->addElement('new_task_form')->render();
-            } else {
-                throw new Exception("Not permissions");
-            }
-        } catch (Exception $e) {
-            $view = new NormalView('Error');
-            $view->addElement('error', $e->getMessage())->render();
-        }
-    }
-
-    public static function deleteAction($id) {
-        try {
-            $task = TaskModel::getTask($id);
-            if($_SESSION['auth'] === $task['author']){
-                TaskModel::delete($id);
-                $view = new NormalView('Task #'.$task['id'].' delete');
-                $view->addElement('message', 'Task #'.$task['id'].' has been deleted');
-                $view->render();
-            } else {
-                throw new Exception("Not permissions");
-            }
-        } catch (Exception $e) {
-            $view = new NormalView('Error');
-            $view->addElement('error', $e->getMessage())->render();
+    protected static function deleteAction($id) {
+        $task = TaskModel::getTask($id);
+        if($_SESSION['auth'] === $task['author']){
+            TaskModel::delete($id);
+            $view = new NormalView('Task #'.$task['id'].' delete');
+            $view->addElement('message', 'Task #'.$task['id'].' has been deleted');
+            $view->render();
+        } else {
+            throw new Exception("Not permissions");
         }
     }
 }
