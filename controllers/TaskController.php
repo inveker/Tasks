@@ -46,22 +46,21 @@ class TaskController
     }
 
     public static function newAction() {
-        $view = new NormalView('New task');
-        if($_SESSION['auth'] !== null) { //Доступ только для авторизированных пользователей
-            try {
+        try {
+            if($_SESSION['auth'] !== null) { //Доступ только для авторизированных пользователей
                 $id = TaskModel::addNewTask();
                 if($id) { //Если модель удачно выполнилась
                     header("Location: /task/show/$id");
                     exit();
                 }
-                $view->addElement('new_task_form');
-            } catch (Exception $e) {
-                $view->addElement('error', $e->getMessage());
+                $view = new NormalView('New task');
+                $view->addElement('new_task_form')->render();
+            } else {
+                throw new Exception("Not permissions");
             }
-            $view->render();
-        } else {
-            $view = new NormalView('Not permissions');
-            $view->addElement('error', 'Not permissions')->render();
+        } catch (Exception $e) {
+            $view = new NormalView('Error');
+            $view->addElement('error', $e->getMessage())->render();
         }
     }
 
