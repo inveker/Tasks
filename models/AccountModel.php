@@ -2,10 +2,7 @@
 
 class AccountModel
 {
-    //Возвращаем 3 вида значений TRUE FALSE NULL
-    //TRUE - когда пользовтель найден
-    //FALSE - когда введены неверные данные
-    //NULL - когда пост запрос не обрабатывается
+
     public static function login() {
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
@@ -15,15 +12,12 @@ class AccountModel
             if($query) {
                 $_SESSION['auth'] = $username;
                 return true;
+            } else {
+                throw new Exception("Incorrect login or password");
             }
-            else return false;
-        } return null;
+        }
     }
 
-    //Возвращаем 3 вида значений TRUE FALSE NULL
-    //TRUE - когда пользовтеля удалось зарегестрировать
-    //FALSE - когда пользователя нельзя зарегестрировать
-    //NULL - когда пост запрос не обрабатывается
     public static function register() {
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
@@ -43,7 +37,6 @@ class AccountModel
         }
     }
 
-    //Делает текущего пользователя не авторизированным
     public static function logout() {
         unset($_SESSION['auth']);
     }
