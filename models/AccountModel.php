@@ -29,7 +29,8 @@ class AccountModel
             $username = $_POST['username'];
             $password = $_POST['password'];
             try {
-                DB::run("INSERT INTO users SET username=?, password=?", $username, $password);
+                DB::run("INSERT INTO users SET username=?, password=?",
+                                                $username, $password);
                 return $username;
             } catch (PDOException $e) {
                 return false;

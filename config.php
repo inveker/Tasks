@@ -1,6 +1,10 @@
 <?php
 
+define('DEFAULT_CONTROLLER', 'MainController');
+define('DEFAULT_ACTION', 'previewAction');
+
 define('PATH', array(
+                    'TEMPLATES' => 'templates/',
                     'CORE' => 'core/',
                     'MODELS' => 'models/',
                     'CONTROLLERS' => 'controllers/',

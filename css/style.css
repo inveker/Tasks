@@ -3,6 +3,7 @@
     font-size: 16px;
     text-decoration: none;
     color: black;
+    word-wrap: break-word;
 }
 html {
     height: 100%;
@@ -103,6 +104,7 @@ textarea {
     align-self: center;
 }
 input[type="submit"] {
+    cursor: pointer;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     transition: 0.5s;

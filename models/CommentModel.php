@@ -9,4 +9,9 @@ class CommentModel
             yield $comment;
         }
     }
+
+    public static function addComment($taskId) {
+        DB::run("INSERT INTO comments SET comment=?, author=?, task=?",
+                            $_POST['comment'], $_SESSION['auth'], $taskId);
+    }
 }

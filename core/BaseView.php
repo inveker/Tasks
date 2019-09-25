@@ -16,12 +16,12 @@ class BaseView
     public function render() {
         foreach ($this->queue as $element) {
             extract($element['data']);
-            require "templates/{$element['path']}.php";
+            require PATH['TEMPLATES'].$element['path'].'.php';
         }
         exit();
     }
 
     protected function tmp($name) {
-        return "templates/$name.php";
+        return PATH['TEMPLATES'].$name.'.php';
     }
 }

@@ -1,8 +1,15 @@
 <?php
 
-class Account
+class AccountController
 {
-    public static function login() {
+    //Событие регистрации
+    //Может рендерить 4 различных
+    //Варианта страниц:
+    //1) После создания нового аккаунта
+    //2) С формой регистрации
+    //3) С формой регистрации и сообщением об ошибке
+    //4) С сообщение об ошибке, для уже авторизированных пользователей
+    public static function loginAction() {
         $view = new NormalView('Login');
         //Если пользователь еще не авторизирован
         if($_SESSION['auth'] === null) {
@@ -26,7 +33,14 @@ class Account
         $view->render();
     }
 
-    public static function register() {
+    //Событие регистрации
+    //Может рендерить 4 различных
+    //Варианта страниц:
+    //1) После создания нового аккаунта
+    //2) С формой регистрации
+    //3) С формой регистрации и сообщением об ошибке
+    //4) С сообщение об ошибке, для уже авторизированных пользователей
+    public static function registerAction() {
         $view = new NormalView('Register');
         //Если пользователь еще не авторизирован
         if($_SESSION['auth'] === null) {
@@ -50,7 +64,7 @@ class Account
         $view->render();
     }
 
-    public static function logout() {
+    public static function logoutAction() {
         AccountModel::logout();
         header('Location: /account/login');
         exit();

@@ -1,2 +1,2 @@
-<a class="button" href="#">Edit</a>
-<a class="button" href="#">Delete</a>
+<a class="button" href="/task/edit/<?=$id?>">Edit</a>
+<a class="button" href="/task/delete/<?=$id?>">Delete</a>

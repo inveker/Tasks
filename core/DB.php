@@ -21,6 +21,11 @@ class Db
         return self::$instance;
     }
 
+    public static function __callStatic($method, $args){
+        return call_user_func_array(array(self::instance(), $method), $args);
+    }
+
+
     public static function run($sql, ...$args)
     {
         if (!$args) {

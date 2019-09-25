@@ -1,8 +1,8 @@
 <?php
 
-class Main
+class MainController
 {
-    public static function preview() {
+    public static function previewAction() {
         $view = new NormalView('Preview');
         $previews = TaskModel::getPreviews();
         foreach ($previews as $preview) {
@@ -11,7 +11,7 @@ class Main
         $view->render();
     }
 
-    public static function page404() {
+    public static function page404Action() {
         $view = new NormalView('404 Not found');
         $view->addElement('error', '404 Not Found')->render();
     }
