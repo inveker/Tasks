@@ -9,7 +9,7 @@ class AccountModel
             $password = $_POST['password'];
             $query = DB::run("SELECT * FROM users WHERE username=? AND password=?",
                                                                 $username, $password)->fetch();
-            if($query) {
+            if($query) { //Если есть данные
                 $_SESSION['auth'] = $username;
                 return true;
             } else {

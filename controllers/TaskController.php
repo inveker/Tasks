@@ -3,29 +3,26 @@
 class TaskController
 {
     public static function showAction($id = 0) {
-        $task = TaskModel::getTask($id);
-        if($task) {
+        try {
             $task = TaskModel::getTask($id);
-            $view = new NormalView('Task #'.$task['id']);
-            //Добавляем таск
+
+            $view = new NormalView('Task #'.$id);
             $view->addElement('task', $task);
-            //Если пользователь автор таска
-            //Добавляем уравляющие кнопки
-            if($_SESSION['auth'] === $task['author'])
+
+            if($_SESSION['auth'] === $task['author']) {
                 $view->addElement('task_controls', $task);
-            //Если пользователь авторизирован
-            //Добавляем форму 
-            if($_SESSION['auth'] !== null)
+            }
+            if($_SESSION['auth'] !== null) {
                 $view->addElement('form_comment', $task);
-            //Добавляем комментраии
+            }
             $comments = CommentModel::getComments($task['id']);
             foreach ($comments as $comment) {
                 $view->addElement('comment', $comment);
             }
             $view->render();
-        } else {
-            $view = new NormalView('Not found task');
-            $view->addElement('error', "Task #$id not found")->render();
+        } catch (Exception $e) {
+            $view = new NormalView('Not Found');
+            $view->addElement('error', $e->getMessage())->render();
         }
     }
 

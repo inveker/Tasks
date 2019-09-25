@@ -12,7 +12,12 @@ class TaskModel
 
     public static function getTask($id) {
         $task = DB::run("SELECT * FROM tasks WHERE id=?", $id)->fetch();
-        return $task;
+        if($task) {
+            return $task;
+        } else {
+            throw new Exception("Task not found");
+        }
+        
     }
 
     public static function updateTask($id) {

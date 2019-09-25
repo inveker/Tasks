@@ -5,11 +5,10 @@ class AccountController
 
     public static function loginAction() {
         $view = new NormalView('Login');
-
-        if($_SESSION['auth'] === null) {
+        if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
             try {
                 $result = AccountModel::login();
-                if($result === true) {
+                if($result === true) { //Warning: render() here
                     $view->addElement('message', "Welcome {$_SESSION['auth']}")->render();
                 }
             } catch (Exception $e) {
@@ -24,10 +23,10 @@ class AccountController
 
     public static function registerAction() {
         $view = new NormalView('Register');
-        if($_SESSION['auth'] === null) {
+        if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
             try {
                 $result = AccountModel::register();
-                if($result == true) {
+                if($result == true) { //Warning: render() here
                     $view->addElement('message', "You are created acconut [ $result ]")->render();
                 }
             } catch (Exception $e) {
