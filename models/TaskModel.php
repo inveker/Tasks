@@ -22,17 +22,25 @@ class TaskModel
 
     public static function updateTask($id) {
         if(isset($_POST['description']) && isset($_POST['code'])) {
-            DB::run("UPDATE tasks SET description=?, code=? WHERE id=?",
+            try {
+                DB::run("UPDATE tasks SET description=?, code=? WHERE id=?",
                         $_POST['description'], $_POST['code'], $id);
-            return true;
+                return true;
+            } catch (PDOException $e) {
+                throw new Exception("Failed to update task");
+            }
         }
     }
 
     public static function addNewTask() {
         if(isset($_POST['description']) && isset($_POST['code'])) {
-            $q = DB::run("INSERT INTO tasks SET description=?, code=?, author=?",
+            try {
+                $q = DB::run("INSERT INTO tasks SET description=?, code=?, author=?",
                         $_POST['description'], $_POST['code'], $_SESSION['auth']);
-            return DB::lastInsertId();
+                return DB::lastInsertId();
+            } catch (Exception $e) {
+                throw new Exception("Failed to add a new task to the database");
+            }
         }
     }
 

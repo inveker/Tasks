@@ -21,53 +21,48 @@ class TaskController
             }
             $view->render();
         } catch (Exception $e) {
-            $view = new NormalView('Not Found');
+            $view = new NormalView('Error');
             $view->addElement('error', $e->getMessage())->render();
         }
     }
 
     public static function editAction($id = 0) {
-        $task = TaskModel::getTask($id);
-        if($task) {
-            $view = new NormalView('Edit #'.$task['id']);
-            //Если пользователь и автор таска совпадают
-            if($_SESSION['auth'] === $task['author']) {
-                //Если выполнился POST запрос
-                //Перенаправляем на событие show
-                if(TaskModel::updateTask($task['id'])) {
+        try {
+            $task = TaskModel::getTask($id);
+            if($_SESSION['auth'] === $task['author']) { //Доступ только для автора таска
+                if(TaskModel::updateTask($task['id']) === true) { //Если таск был обновлен
                     header('Location: /task/show/'.$task['id']);
                     exit();
                 }
-                //Показываем форму
+                $view = new NormalView('Edit #'.$task['id']);
                 $view->addElement('edit_task_form', $task)->render();
-            } else
-                //Добовляем сообщение о том что у пользователя нет прав
-                $view->addElement('error', 'Not permissions');
-        } else {
-            //Если таск не найден выводим сообщение об этом
-            $view = new NormalView('Not found task');
-            $view->addElement('error', "Not found task #$id")->render();
+            } else { 
+                throw new Exception("Not permissions");
+            }
+        } catch (Exception $e) {
+            $view = new NormalView('Error');
+            $view->addElement('error', $e->getMessage())->render();
         }
     }
 
     public static function newAction() {
-        if($_SESSION['auth'] !== null) {
-            $view = new NormalView('New task');
-            //Если выполнился POST запрос
-            //то в переменной $id будет ID новой записи
-            //На которую будет перенаправлен пользователь
-            $id = TaskModel::addNewTask();
-            if($id) {
-                header("Location: /task/show/$id");
-                exit();
+        $view = new NormalView('New task');
+        if($_SESSION['auth'] !== null) { //Доступ только для авторизированных пользователей
+            try {
+                $id = TaskModel::addNewTask();
+                if($id) { //Если модель удачно выполнилась
+                    header("Location: /task/show/$id");
+                    exit();
+                }
+                $view->addElement('new_task_form');
+            } catch (Exception $e) {
+                $view->addElement('error', $e->getMessage());
             }
-            //Если пост запроса не было, показываем форму
-            $view->addElement('new_task_form')->render();
+            $view->render();
         } else {
             $view = new NormalView('Not permissions');
             $view->addElement('error', 'Not permissions')->render();
         }
-        
     }
 
     public static function deleteAction($id) {
