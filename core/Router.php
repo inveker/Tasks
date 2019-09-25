@@ -4,7 +4,7 @@ class Router
 {
     public static function run() {
         $uri = self::prepare($_SERVER['REQUEST_URI']);
-        if(empty($uri[0])) {
+        if(empty($uri[0]) || empty($uri[1])) {
             $controller = DEFAULT_CONTROLLER;
             $action = DEFAULT_ACTION;
             $args = [];
