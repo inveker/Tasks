@@ -65,14 +65,19 @@ class TaskController
     }
 
     public static function deleteAction($id) {
-        $task = TaskModel::getTask($id);
-        if($_SESSION['auth'] === $task['author']){
-            TaskModel::delete($id);
-            $view = new NormalView('Task #'.$task['id'].' delete');
-            $view->addElement('message', 'Task #'.$task['id'].' has been deleted')->render();
-        } else {
-            $view = new NormalView('Not permissions');
-            $view->addElement('error', 'Not permissions')->render();
+        try {
+            $task = TaskModel::getTask($id);
+            if($_SESSION['auth'] === $task['author']){
+                TaskModel::delete($id);
+                $view = new NormalView('Task #'.$task['id'].' delete');
+                $view->addElement('message', 'Task #'.$task['id'].' has been deleted');
+                $view->render();
+            } else {
+                throw new Exception("Not permissions");
+            }
+        } catch (Exception $e) {
+            $view = new NormalView('Error');
+            $view->addElement('error', $e->getMessage())->render();
         }
     }
 }

@@ -44,8 +44,13 @@ class TaskModel
         }
     }
 
-    public static function delete($id) {
-        DB::run("DELETE FROM tasks WHERE id=?", $id);
-        DB::run("DELETE FROM comments WHERE task=?", $id);
+    public static function delete($id) {4
+        try {
+            DB::run("DELETE FROM tasks WHERE id=?", $id);
+            DB::run("DELETE FROM comments WHERE task=?", $id);
+        } catch (PDOException $e) {
+            throw new Exception("Error deleting task");
+        }
+        
     }
 }
