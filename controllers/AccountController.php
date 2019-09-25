@@ -45,22 +45,18 @@ class AccountController
         //Если пользователь еще не авторизирован
         if($_SESSION['auth'] === null) {
             //Обрабатываем POST запрос
-            $result = AccountModel::register();
-            //Если пользователя удалось зарегестрировать
-            //В переменной $result храниться имя пользователя
-            //Которое добавляется в сообщении об успешной регистрации
-            //После чего рендерится страница и скрипт завершается
-            if($result == true)
-                $view->addElement('message', "You are created acconut [ $result ]")->render();
-            //Добавляем контент страницы Register
+            try {
+                $result = AccountModel::register();
+                if($result == true) {
+                    $view->addElement('message', "You are created acconut [ $result ]")->render();
+                }
+            } catch (Exception $e) {
+                $view->addElement('error', $e->getMessage());
+            }
             $view->addElement('register');
-            //Если пользователь уже существует в базе
-            //Добавляем сообщение об ошибке
-            if($result === false) 
-                $view->addElement('error', 'This user has already exists');
-        } else
-            //Если пользователь уже авторизирован, добавляем сообщение с ошибкой
+        } else {
             $view->addElement('error', 'You are login');
+        }
         $view->render();
     }
 

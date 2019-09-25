@@ -28,14 +28,19 @@ class AccountModel
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            try {
-                DB::run("INSERT INTO users SET username=?, password=?",
+            if(preg_match("/[a-z0-9]{4,}/i", $username) &&
+               preg_match("/[a-z0-9]{4,}/i", $password)) {
+                try {
+                    DB::run("INSERT INTO users SET username=?, password=?",
                                                 $username, $password);
-                return $username;
-            } catch (PDOException $e) {
-                return false;
+                    return $username;
+                } catch (PDOException $e) {
+                    throw new Exception("This user already exists");
+                }
+            } else {
+                throw new Exception("Login and password can contain only A-z or 0-9");
             }
-        } return null;
+        }
     }
 
     //Делает текущего пользователя не авторизированным
