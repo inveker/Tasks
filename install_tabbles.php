@@ -15,7 +15,8 @@ try {
                                     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                                     comment VARCHAR(200) NOT NULL,
                                     author VARCHAR(20) NOT NULL,
-                                    task INT UNSIGNED NOT NULL
+                                    task INT UNSIGNED NOT NULL,
+                                    date DATETIME NOT NULL
                                     )");
 
     DB::run("CREATE TABLE users (
