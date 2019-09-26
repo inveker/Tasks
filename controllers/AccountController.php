@@ -37,7 +37,7 @@ class AccountController extends NormalController
     }
 
     public static function logoutAction() {
-        AccountModel::logout();
+        unset($_SESSION['auth']);
         header('Location: /account/login');
         exit();
     }

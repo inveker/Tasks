@@ -39,8 +39,4 @@ class AccountModel
             }
         }
     }
-
-    public static function logout() {
-        unset($_SESSION['auth']);
-    }
 }
