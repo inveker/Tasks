@@ -12,6 +12,6 @@ class MainController extends NormalController
     }
 
     protected static function page404Action($controller, $action) {
-        throw new Exception("404 Not Found $controller|$action");
+        throw new Exception("404 Not Found [ $controller|$action ]");
     }
 }

@@ -2,6 +2,7 @@
 
 class TaskModel
 {
+
     public static function getPreviews() {
         $previews =  DB::run("SELECT id, description, author, date FROM tasks")->fetchAll();
         $previews = array_reverse($previews);
@@ -22,12 +23,14 @@ class TaskModel
 
     public static function updateTask($id) {
         if(isset($_POST['description']) && isset($_POST['code'])) {
+            $description = htmlspecialchars($_POST['description']);
+            $code        = htmlspecialchars($_POST['code']);
             try {
                 DB::run("UPDATE tasks SET description=?,
                                           code=?
                                           WHERE id=?",
-                                          $_POST['description'],
-                                          $_POST['code'],
+                                          $description,
+                                          $code,
                                           $id);
                 return true;
             } catch (PDOException $e) {
@@ -38,13 +41,15 @@ class TaskModel
 
     public static function addNewTask() {
         if(isset($_POST['description']) && isset($_POST['code'])) {
+            $description = htmlspecialchars($_POST['description']);
+            $code        = htmlspecialchars($_POST['code']);
             try {
                 $q = DB::run("INSERT INTO tasks SET description=?,
                                                     code=?,
                                                     author=?,
                                                     date=?",
-                                                    $_POST['description'],
-                                                    $_POST['code'],
+                                                    $description,
+                                                    $code,
                                                     $_SESSION['auth'],
                                                     date('Y-m-d H:i:s', time()));
                 return DB::lastInsertId();

@@ -5,6 +5,8 @@ class TaskController extends NormalController
 
     protected static function showAction($id = 0) {
             $task = TaskModel::getTask($id);
+            $task['code'] = htmlspecialchars_decode($task['code']);
+            $task['code'] = highlight_string($task['code'], true);
 
             $view = new NormalView('Task #'.$id);
             $view->addElement('task', $task);
