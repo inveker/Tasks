@@ -3,7 +3,7 @@
 class TaskModel
 {
     public static function getPreviews() {
-        $previews =  DB::run("SELECT id, description, author FROM tasks")->fetchAll();
+        $previews =  DB::run("SELECT id, description, author, date FROM tasks")->fetchAll();
         $previews = array_reverse($previews);
         foreach ($previews as $preview) {
             yield $preview;
@@ -23,8 +23,12 @@ class TaskModel
     public static function updateTask($id) {
         if(isset($_POST['description']) && isset($_POST['code'])) {
             try {
-                DB::run("UPDATE tasks SET description=?, code=? WHERE id=?",
-                        $_POST['description'], $_POST['code'], $id);
+                DB::run("UPDATE tasks SET description=?,
+                                          code=?
+                                          WHERE id=?",
+                                          $_POST['description'],
+                                          $_POST['code'],
+                                          $id);
                 return true;
             } catch (PDOException $e) {
                 throw new Exception("Failed to update task");
@@ -35,11 +39,17 @@ class TaskModel
     public static function addNewTask() {
         if(isset($_POST['description']) && isset($_POST['code'])) {
             try {
-                $q = DB::run("INSERT INTO tasks SET description=?, code=?, author=?",
-                        $_POST['description'], $_POST['code'], $_SESSION['auth']);
+                $q = DB::run("INSERT INTO tasks SET description=?,
+                                                    code=?,
+                                                    author=?,
+                                                    date=?",
+                                                    $_POST['description'],
+                                                    $_POST['code'],
+                                                    $_SESSION['auth'],
+                                                    date('Y-m-d H:i:s', time()));
                 return DB::lastInsertId();
             } catch (Exception $e) {
-                throw new Exception("Failed to add a new task to the database");
+                throw new Exception("Failed to add a new task to the database".$e);
             }
         }
     }
