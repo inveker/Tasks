@@ -7,9 +7,9 @@ class AccountModel
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $query = DB::run("SELECT * FROM users WHERE username=? AND password=?",
-                                                                $username, $password)->fetch();
-            if($query) { //Если есть данные
+            $hash = DB::run("SELECT password FROM users WHERE username=?", $username)->fetch();
+            $hash = $hash['password'];
+            if(password_verify($password, $hash)) {
                 $_SESSION['auth'] = $username;
                 return true;
             } else {
@@ -27,11 +27,12 @@ class AccountModel
                    throw new Exception("Login and password can contain only A-z or 0-9");
             } elseif(strlen($username) >= 4 && strlen($password) >= 4){ //Проверка на длину
                 try {
+                    $password = password_hash($password, PASSWORD_DEFAULT);
                     DB::run("INSERT INTO users SET username=?, password=?",
                                                 $username, $password);
                     return $username;
                 } catch (PDOException $e){
-                    throw new Exception("This user already exists");
+                    throw new Exception("This user already exists".$e);
                 }
             } else {
                 throw new Exception("Login and password length must be at least 4");
