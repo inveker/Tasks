@@ -22,8 +22,8 @@ class AccountModel
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            if(preg_match("/[^a-z0-9]/", $username) || //Проверка на недопустимые символы
-               preg_match("/[^a-z0-9]/", $password)) {
+            if(preg_match("/[^a-z0-9]/i", $username) || //Проверка на недопустимые символы
+               preg_match("/[^a-z0-9]/i", $password)) {
                    throw new Exception("Login and password can contain only A-z or 0-9");
             } elseif(strlen($username) >= 4 && strlen($password) >= 4){ //Проверка на длину
                 try {
@@ -32,7 +32,7 @@ class AccountModel
                                                 $username, $password);
                     return $username;
                 } catch (PDOException $e){
-                    throw new Exception("This user already exists".$e);
+                    throw new Exception("This user already exists");
                 }
             } else {
                 throw new Exception("Login and password length must be at least 4");
