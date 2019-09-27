@@ -1,10 +1,10 @@
 <?php
 
-class AccountController extends NormalController
+class AccountController extends BaseController
 {
     public static function loginAction() {
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
-            $view = new NormalView('Login');
+            $view = new BaseView('Login');
             try {
                 $result = AccountModel::login();
                 if($result === true) { //Warning: render() here
@@ -21,7 +21,7 @@ class AccountController extends NormalController
 
     public static function registerAction() {
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
-            $view = new NormalView('Register');
+            $view = new BaseView('Register');
             try {
                 $result = AccountModel::register();
                 if($result == true) { //Warning: render() here

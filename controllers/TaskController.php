@@ -1,6 +1,6 @@
 <?php
 
-class TaskController extends NormalController
+class TaskController extends BaseController
 {
 
     protected static function showAction($id = 0) {
@@ -8,7 +8,7 @@ class TaskController extends NormalController
             $task['code'] = htmlspecialchars_decode($task['code']);
             $task['code'] = highlight_string($task['code'], true);
 
-            $view = new NormalView('Task #'.$id);
+            $view = new BaseView('Task #'.$id);
             $view->addElement('task', $task);
 
             if($_SESSION['auth'] === $task['author']) {
@@ -31,7 +31,7 @@ class TaskController extends NormalController
                 header('Location: /task/show/'.$task['id']);
                 exit();
             }
-            $view = new NormalView('Edit #'.$task['id']);
+            $view = new BaseView('Edit #'.$task['id']);
             $view->addElement('edit_task_form', $task)->render();
         } else { 
             throw new Exception("Not permissions");
@@ -45,7 +45,7 @@ class TaskController extends NormalController
                 header("Location: /task/show/$id");
             exit();
             }
-            $view = new NormalView('New task');
+            $view = new BaseView('New task');
             $view->addElement('new_task_form')->render();
         } else {
             throw new Exception("Not permissions");
@@ -56,7 +56,7 @@ class TaskController extends NormalController
         $task = TaskModel::getTask($id);
         if($_SESSION['auth'] === $task['author']){
             TaskModel::delete($id);
-            $view = new NormalView('Task #'.$task['id'].' delete');
+            $view = new BaseView('Task #'.$task['id'].' delete');
             $view->addElement('message', 'Task #'.$task['id'].' has been deleted');
             $view->render();
         } else {

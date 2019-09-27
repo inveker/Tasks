@@ -1,9 +1,9 @@
 <?php
 
-class MainController extends NormalController
+class MainController extends BaseController
 {
     protected static function previewAction() {
-        $view = new NormalView('Preview');
+        $view = new BaseView('Preview');
         $previews = TaskModel::getPreviews();
         foreach ($previews as $preview) {
             $view->addElement('preview', $preview);
