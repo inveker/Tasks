@@ -13,7 +13,7 @@ try {
 
     DB::run("CREATE TABLE comments (
                                     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                    comment VARCHAR(200) NOT NULL,
+                                    comment VARCHAR(500) NOT NULL,
                                     author VARCHAR(20) NOT NULL,
                                     task INT UNSIGNED NOT NULL,
                                     date DATETIME NOT NULL
