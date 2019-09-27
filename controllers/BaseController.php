@@ -1,6 +1,6 @@
 <?php
 
-class NormalController extends BaseController
+class BaseController extends NormalController
 {
     protected static function exeptionHandler($e) {
         $view = new NormalView('Error');

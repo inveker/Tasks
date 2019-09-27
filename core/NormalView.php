@@ -1,6 +1,6 @@
 <?php
 
-class BaseView
+class NormalView
 {
     protected $queue = [];
 
@@ -18,7 +18,6 @@ class BaseView
             extract($element['data']);
             require PATH['TEMPLATES'].$element['path'].'.php';
         }
-        exit();
     }
 
     protected function tmp($name) {

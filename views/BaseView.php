@@ -1,6 +1,6 @@
 <?php
 
-class NormalView extends BaseView
+class BaseView extends NormalView
 {
     protected $title;
 
@@ -21,5 +21,7 @@ class NormalView extends BaseView
         parent::render();
         //Подключаем подвал
         require_once $this->tmp('footer');
+        //Завершаем работу
+        exit();
     }
 }

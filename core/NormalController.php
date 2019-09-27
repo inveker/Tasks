@@ -1,6 +1,6 @@
 <?php
 
-class BaseController
+class NormalController
 {
     protected static function exeptionHandler($e) {
         echo $e->getMessage();
