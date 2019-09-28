@@ -37,6 +37,9 @@ class AccountModel
                                                     $username, $password);
                         return $username;
                     } catch (PDOException $e){
+                        if($e->getCode() == 22001) {
+                            throw new Exception("Allowed size: username - 20, password - 20 characters");
+                            }
                         throw new Exception("This user already exists");
                     }
                 } else {

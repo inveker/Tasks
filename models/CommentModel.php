@@ -27,6 +27,9 @@ class CommentModel
                                                   $taskId,
                                                   date('Y-m-d H:i:s', time()));
             } catch (PDOException $e) {
+                if($e->getCode() == 22001) {
+                    throw new Exception("Allowed comment size 200 characters");
+                }
                 throw new Exception("Failed to add new comment");
             }
         }

@@ -34,6 +34,9 @@ class TaskModel
                                           $id);
                 return true;
             } catch (PDOException $e) {
+                if($e->getCode() == 22001) {
+                    throw new Exception("Allowed size: description: 500, code 5000 characters");
+                }
                 throw new Exception("Failed to update task");
             }
         }
@@ -54,6 +57,9 @@ class TaskModel
                                                     date('Y-m-d H:i:s', time()));
                 return DB::lastInsertId();
             } catch (Exception $e) {
+                if($e->getCode() == 22001) {
+                    throw new Exception("Allowed size: description: 500, code 5000 characters");
+                }
                 throw new Exception("Failed to add a new task to the database".$e);
             }
         }
