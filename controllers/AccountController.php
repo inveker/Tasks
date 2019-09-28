@@ -2,7 +2,7 @@
 
 class AccountController extends BaseController
 {
-    public static function loginAction() {
+    protected static function loginAction() {
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
             $view = new BaseView('Login');
             try {
@@ -19,7 +19,7 @@ class AccountController extends BaseController
         }
     }
 
-    public static function registerAction() {
+    protected static function registerAction() {
         if($_SESSION['auth'] === null) { //Доступ только для не авторизированных пользователей
             $view = new BaseView('Register');
             try {
