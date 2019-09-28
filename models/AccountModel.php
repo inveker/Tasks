@@ -8,8 +8,7 @@ class AccountModel
             $username = $_POST['username'];
             $password = $_POST['password'];
             $hash = DB::run("SELECT password FROM users WHERE username=?", $username)->fetch();
-            $hash = $hash['password'];
-            if(password_verify($password, $hash)) {
+            if(password_verify($password, $hash['password'])) {
                 $_SESSION['auth'] = $username;
                 return true;
             } else {
