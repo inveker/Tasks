@@ -16,7 +16,7 @@ class NormalView
     public function render() {
         foreach ($this->queue as $element) {
             extract($element['data']);
-            require PATH['TEMPLATES'].$element['path'].'.php';
+            require $this->tmp($element['path']);
         }
     }
 
