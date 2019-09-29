@@ -1,11 +1,11 @@
 <?php 
 
-class DB
+final class DB
 {
-    protected static $instance = null;
+    private static $instance = null;
 
-    public function __construct() {}
-    public function __clone() {}
+    private function __construct() {}
+    private function __clone() {}
 
     public static function instance()
     {
